@@ -4,7 +4,7 @@ package Lego.data;
  *
  * @author ibenk
  */
-public class Customer implements User {
+public class Admin implements User {
 
     @Override
     public String getUsername() {
