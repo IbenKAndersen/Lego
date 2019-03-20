@@ -8,7 +8,7 @@ import java.sql.SQLException;
  *
  * @author ibenk
  */
-public class DBConnect {
+public class Connector {
 
     private static final String URL         = "jdbc:mysql://localhost:3306/lego";
     private static final String USERNAME    = "root";
@@ -20,7 +20,7 @@ public class DBConnect {
         uniqueInstance = connect;
     }
 
-    public static Connection DBConnect() throws ClassNotFoundException, SQLException {
+    public static Connection connection() throws ClassNotFoundException, SQLException {
         if ( uniqueInstance == null ) {
             Class.forName( "com.mysql.cj.jdbc.Driver" );
             uniqueInstance = DriverManager.getConnection( URL, USERNAME, PASSWORD );
@@ -28,10 +28,6 @@ public class DBConnect {
         return uniqueInstance;
     }
     
-    public Connection getConnection() {
-        return uniqueInstance;
-    }
-
 }
     
 

@@ -1,5 +1,6 @@
 package Lego.data;
 
+import Lego.logic.LoginException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,15 +11,14 @@ import java.util.logging.Logger;
  */
 public class LegoMain {
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, LoginException {
 
         
             UserMapper mapper = new UserMapper();
             
-            mapper.createUser("Test", "Test", 0);
+            User test = new User("Tests@Test.dk", "Test", "Test");
             
-            //mapper.login("Test", "Test");
-            //mapper.login("Admin", "Admin");
+            mapper.createUser(test);
 
     }
 
