@@ -1,9 +1,150 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Lego.logic;
+
+import Lego.data.User;
+import Lego.data.UserMapper;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ibenk
  */
-public class FrontController {
+@WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
+public class FrontController extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, LoginException {
+
+        response.setContentType("text/html;charset=UTF-8");
+
+        /* Pulling the user out of Session */
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        String origin = (String) request.getParameter("origin");
+        switch (origin) {
+            case "login":
+                login(request, response);
+                break;
+            case "register":
+                register(request, response, user);
+                break;
+            case "order":
+                order(request, response);
+                break;
+            case "view":
+                view(request, response);
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+    private void login(HttpServletRequest request, HttpServletResponse response) throws SQLException, LoginException, ServletException, IOException {
+        /* Get email and password from parameters in url */
+        String email = (String) request.getParameter("email");
+        String password = (String) request.getParameter("password");
+        
+        /* Make an instance of UserMapper to get acces to its methods */
+        UserMapper mapper = new UserMapper();
+        User user = mapper.getUser(email);
+        
+        if (password.equals(user.getPassword())) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            
+            RequestDispatcher dispatch = request.getRequestDispatcher("shop.jsp");
+            dispatch.forward(request, response);
+        }
+
+        request.getRequestDispatcher("loginpage.jsp").forward(request, response);
     
+    }
+
+    private void register(HttpServletRequest request, HttpServletResponse response, User user) throws SQLException, LoginException, ServletException, IOException {
+        /* Get email and password from parameters in url */
+        String email = (String) request.getParameter("email");
+        String password = (String) request.getParameter("password");
+        
+        /* Make an instance of UserMapper to get acces to its methods */ 
+        UserMapper mapper = new UserMapper();
+
+        /* Isert the new user information into the sql database */ 
+        mapper.createUser(user);
+        
+        /* Forward user to login page */
+        RequestDispatcher dispatch = request.getRequestDispatcher("/login.jsp");
+        dispatch.forward(request, response);
+    }
+
+    private void order(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void view(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
