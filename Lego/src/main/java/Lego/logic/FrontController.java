@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Lego.logic;
 
 import Lego.data.User;
@@ -36,7 +31,7 @@ public class FrontController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, LoginException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
 
@@ -102,28 +97,32 @@ public class FrontController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void login(HttpServletRequest request, HttpServletResponse response) throws SQLException, LoginException, ServletException, IOException {
-        /* Get email and password from parameters in url */
-        String email = (String) request.getParameter("email");
-        String password = (String) request.getParameter("password");
-        
-        /* Make an instance of UserMapper to get acces to its methods */
-        UserMapper mapper = new UserMapper();
-        User user = mapper.getUser(email);
-        
-        if (password.equals(user.getPassword())) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            
-            RequestDispatcher dispatch = request.getRequestDispatcher("shop.jsp");
-            dispatch.forward(request, response);
-        }
+    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException {
+        try {
+            /* Get email and password from parameters in url */
+            String email = (String) request.getParameter("email");
+            String password = (String) request.getParameter("password");
 
-        request.getRequestDispatcher("loginpage.jsp").forward(request, response);
+            /* Make an instance of UserMapper to get acces to its methods */
+            UserMapper mapper = new UserMapper();
+            User user = mapper.getUser(email);
+            
+            if (password.equals(user.getPassword())) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                
+                RequestDispatcher dispatch = request.getRequestDispatcher("shop.jsp");
+                dispatch.forward(request, response);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     
     }
 
-    private void register(HttpServletRequest request, HttpServletResponse response, User user) throws SQLException, LoginException, ServletException, IOException {
+    private void register(HttpServletRequest request, HttpServletResponse response, User user) throws LoginException, ServletException, IOException, SQLException {
+ 
         /* Get email and password from parameters in url */
         String email = (String) request.getParameter("email");
         String password = (String) request.getParameter("password");
