@@ -21,7 +21,7 @@ public class UserMapper {
      * The prepareStatement interface improves performance in the application by
      * using passing parameter (?) the query is compiled only once.
      */
-    public void createUser(String email, String password) throws SQLException, ClassNotFoundException 
+    public static void createUser(String email, String password) throws SQLException, ClassNotFoundException 
     {
        if (email != null && password != null)
        {    
@@ -74,7 +74,7 @@ public class UserMapper {
      * input.
      *
      */
-    public User getUser(String email) throws SQLException, ClassNotFoundException {
+    public static User getUser(String email) throws SQLException, ClassNotFoundException {
         User user = new User();
         Connector con = new Connector();
 

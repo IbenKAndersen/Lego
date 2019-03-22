@@ -150,11 +150,7 @@ public class FrontController extends HttpServlet {
 //        /* Isert the new user information into the sql database */
 //        mapper.createUser(email, password);
 
-
         request.getRequestDispatcher("login.jsp").forward(request, response);
-
-//        RequestDispatcher dispatch = request.getRequestDispatcher("login.jsp");
-//        dispatch.forward(request, response);
     }
 
     private void order(HttpServletRequest request, HttpServletResponse response) {
