@@ -67,16 +67,21 @@ public class UserMapper {
      */
     public User getUser(String email) throws SQLException, ClassNotFoundException {
         User user = new User();
-        Connection con = Connector.connection();
+        Connector con = new Connector();
 
         String query
                 = "SELECT * FROM lego.user "
-                + "WHERE `email`=?;";
+                + "WHERE `email`='" + email + "';";
 
-        PreparedStatement ps = con.prepareStatement(query);
-        ps.setString(1, email);
-        ResultSet rs = ps.executeQuery();
+        Connection connection = con.connection();
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
 
+        while (rs.next()) {
+            String password = rs.getString("password");
+            user.setPassword(password);
+        }
+        
         user.setEmail(email);
         return user;
     }

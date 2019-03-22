@@ -18,7 +18,7 @@
         
         Log in to order your Lego house 
         <br><br><br>
-        <br><a href="loginpage.jsp">click to log in</a>
+        <br><a href="login.jsp">click to log in</a>
         <br>
         <br><a href="register.jsp">click to register</a>
         
