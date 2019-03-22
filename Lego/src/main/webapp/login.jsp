@@ -10,9 +10,9 @@
         <form method="post" action="/Lego/FrontController?">
             <input type="hidden" name="origin" value="login">
             Email:<br>
-            <input type="text" name="email" value="a"/><br>
+            <input type="text" name="email" value="Test"/><br>
             Password:<br> 
-            <input type="password" name="password" value="a"/> <br><br>
+            <input type="password" name="password" value="Test"/> <br><br>
             <input type="submit" value="Log in">
         </form>
     </body>

@@ -16,13 +16,13 @@ public class LegoMain {
 
         /* This works */
 //      UserMapper mapper = new UserMapper();
-//      User test = new User("Tests@Test.dk", "Test");
+//      User test = new User("Test1@Test1.dk", "Test1");
 //      mapper.createUser(test);
 
         /* Not working yet */
-        LegoHouseOrder order = new LegoHouseOrder();
-        BrickCalculator calculator = new BrickCalculator();
-        calculator.getBricks(order);
+//        LegoHouseOrder order = new LegoHouseOrder();
+//        BrickCalculator calculator = new BrickCalculator();
+//        calculator.getBricks(order);
 
     }
 
