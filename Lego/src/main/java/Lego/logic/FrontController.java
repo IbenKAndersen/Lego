@@ -47,7 +47,7 @@ public class FrontController extends HttpServlet {
                 login(request, response);
                 break;
             case "register":
-                register(request, response, user);
+                register(request, response);
                 break;
             case "order":
                 order(request, response);
@@ -124,11 +124,11 @@ public class FrontController extends HttpServlet {
             /* Make an instance of UserMapper to get acces to its methods */
             UserMapper mapper = new UserMapper();
             User user = mapper.getUser(email);
-            
+
             if (password.equals(user.getPassword())) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                
+
                 RequestDispatcher dispatch = request.getRequestDispatcher("shop.jsp");
                 dispatch.forward(request, response);
             }
@@ -136,40 +136,33 @@ public class FrontController extends HttpServlet {
             e.getMessage();
         }
         request.getRequestDispatcher("login.jsp").forward(request, response);
-    
+
     }
 
-    private void register(HttpServletRequest request, HttpServletResponse response, User user) throws LoginException, ServletException, IOException, SQLException {
- 
-        try {
-            /* Get email and password from parameters in url */
-            String email = (String) request.getParameter("email");
-            String password = (String) request.getParameter("password");
+    private void register(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
+        /* Get email and password from parameters in url */
+        String email = (String) request.getParameter("email");
+        String password = (String) request.getParameter("password");
 
-            /* Make an instance of UserMapper to get acces to its methods */            
-            UserMapper mapper = new UserMapper();
+        /* Make an instance of UserMapper to get acces to its methods */
+        UserMapper mapper = new UserMapper();
 
-            /* Isert the new user information into the sql database */            
-            mapper.createUser(user);
+        /* Isert the new user information into the sql database */
+        mapper.createUser(email, password);
 
-            /* Forward user to login page */
-            RequestDispatcher dispatch = request.getRequestDispatcher("/login.jsp");
-            dispatch.forward(request, response);
-            
-        } catch (LoginException e) {
-            e.getMessage();
-        }
+        RequestDispatcher dispatch = request.getRequestDispatcher("shop.jsp");
+        dispatch.forward(request, response);
     }
 
     private void order(HttpServletRequest request, HttpServletResponse response) {
         /* Get parameters from the request and parse to int */
-        int length = (int) Integer.parseInt( (String) request.getParameter("length"));
-        int width = (int) Integer.parseInt( (String) request.getParameter("width"));
-        int height = (int) Integer.parseInt( (String) request.getParameter("height"));
-        
+        int length = (int) Integer.parseInt((String) request.getParameter("length"));
+        int width = (int) Integer.parseInt((String) request.getParameter("width"));
+        int height = (int) Integer.parseInt((String) request.getParameter("height"));
+
         /* Instantiate LegoHouseOrder to add parameters to order */
         LegoHouseOrder order = new LegoHouseOrder(length, width, height);
-        
+
         /* Instantiate BrickCalculator to get acces to its methods*/
         BrickCalculator calculator = new BrickCalculator();
         calculator.getBricks(order);
@@ -177,8 +170,7 @@ public class FrontController extends HttpServlet {
 
     private void view(HttpServletRequest request, HttpServletResponse response) {
         LegoBrick brick = new LegoBrick();
-        
-        
+
     }
 
 }

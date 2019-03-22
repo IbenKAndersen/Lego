@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,17 +21,24 @@ public class UserMapper {
      * The prepareStatement interface improves performance in the application by
      * using passing parameter (?) the query is compiled only once.
      */
-    public void createUser(User user) throws SQLException, LoginException {
+    public void createUser(String email, String password) throws SQLException, ClassNotFoundException 
+    {
+       if (email != null && password != null)
+       {    
         try {
-            Connection con = Connector.connection();
-            String SQL = "INSERT INTO user (email, password) VALUES (?, ?)";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getPassword());
+            Connector connect = new Connector();
+            
+            String addUser
+                    = "INSERT INTO lego.user (`email`, `password`) "
+                    + "VALUES(?,?);";
+
+            PreparedStatement ps = connect.connection().prepareStatement(addUser);
+            ps.setString(1, email);
+            ps.setString(2, password);
             ps.executeUpdate();
-            ResultSet ids = ps.getGeneratedKeys();
-        } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginException(ex.getMessage());
+            } catch (SQLException ex) {
+          Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);  
+            }
         }
     }
 

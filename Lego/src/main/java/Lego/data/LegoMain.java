@@ -16,8 +16,10 @@ public class LegoMain {
 
         /* This works */
 //      UserMapper mapper = new UserMapper();
-//      User test = new User("Test1@Test1.dk", "Test1");
-//      mapper.createUser(test);
+//      User test = new User("Test2@Test2.dk", "Test2");
+//      String email = test.getEmail();
+//      String password = test.getPassword();
+//      mapper.createUser(email, password);
 
         /* Not working yet */
 //        LegoHouseOrder order = new LegoHouseOrder();
