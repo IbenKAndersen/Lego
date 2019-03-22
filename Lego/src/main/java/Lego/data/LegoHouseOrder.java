@@ -12,6 +12,12 @@ public class LegoHouseOrder {
     public LegoHouseOrder() {
     }
 
+    public LegoHouseOrder(int length, int width, int height) {
+        this.length = length;
+        this.width = width;
+        this.height = height;
+    }
+
     public int getLength() {
         return length;
     }

@@ -1,5 +1,7 @@
 package Lego.logic;
 
+import Lego.data.LegoBrick;
+import Lego.data.LegoHouseOrder;
 import Lego.data.User;
 import Lego.data.UserMapper;
 import java.io.IOException;
@@ -114,8 +116,8 @@ public class FrontController extends HttpServlet {
                 RequestDispatcher dispatch = request.getRequestDispatcher("shop.jsp");
                 dispatch.forward(request, response);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            e.getMessage();
         }
         request.getRequestDispatcher("login.jsp").forward(request, response);
     
@@ -123,27 +125,43 @@ public class FrontController extends HttpServlet {
 
     private void register(HttpServletRequest request, HttpServletResponse response, User user) throws LoginException, ServletException, IOException, SQLException {
  
-        /* Get email and password from parameters in url */
-        String email = (String) request.getParameter("email");
-        String password = (String) request.getParameter("password");
-        
-        /* Make an instance of UserMapper to get acces to its methods */ 
-        UserMapper mapper = new UserMapper();
+        try {
+            /* Get email and password from parameters in url */
+            String email = (String) request.getParameter("email");
+            String password = (String) request.getParameter("password");
 
-        /* Isert the new user information into the sql database */ 
-        mapper.createUser(user);
-        
-        /* Forward user to login page */
-        RequestDispatcher dispatch = request.getRequestDispatcher("/login.jsp");
-        dispatch.forward(request, response);
+            /* Make an instance of UserMapper to get acces to its methods */            
+            UserMapper mapper = new UserMapper();
+
+            /* Isert the new user information into the sql database */            
+            mapper.createUser(user);
+
+            /* Forward user to login page */
+            RequestDispatcher dispatch = request.getRequestDispatcher("/login.jsp");
+            dispatch.forward(request, response);
+        } catch (LoginException e) {
+            e.getMessage();
+        }
     }
 
     private void order(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        /* Get parameters from the request and parse to int */
+        int length = (int) Integer.parseInt( (String) request.getParameter("length"));
+        int width = (int) Integer.parseInt( (String) request.getParameter("width"));
+        int height = (int) Integer.parseInt( (String) request.getParameter("height"));
+        
+        /* Instantiate LegoHouseOrder to add parameters to order */
+        LegoHouseOrder order = new LegoHouseOrder(length, width, height);
+        
+        /* Instantiate BrickCalculator to get acces to its methods*/
+        BrickCalculator calculator = new BrickCalculator();
+        calculator.getBricks(order);
     }
 
     private void view(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        LegoBrick brick = new LegoBrick();
+        
+        
     }
 
 }
