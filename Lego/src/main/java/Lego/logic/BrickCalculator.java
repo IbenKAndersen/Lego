@@ -195,4 +195,34 @@ public class BrickCalculator {
         return width2ndLine;
     }
 
+    /**
+     * getListOfBricks returns a list of all bricks in a Lego House.
+     */
+    public static List<LegoBrick> getListOfBricks(LegoHouseOrder order) {
+        List<LegoBrick> brickList = new ArrayList<>();
+        BrickCalculator c = new BrickCalculator(order);
+        brickList.add(c.bricksLength1stLine());//0
+        brickList.add(c.bricksWidth1stLine());//1
+        brickList.add(c.bricksLength1stLine());//2
+        brickList.add(c.bricksWidth1stLine());//3
+        brickList.add(c.bricksLength2ndLine());//4
+        brickList.add(c.bricksWidth2ndLine());//5
+        brickList.add(c.bricksLength2ndLine());//6
+        brickList.add(c.bricksWidth2ndLine());//7
+        return brickList;
+    }
+    
+    public static List<Integer> getTotalBricks(List<LegoBrick> brick) {
+        List<Integer> list = new ArrayList();
+        int totalFour = 0, totalTwo = 0, totalOne = 0;
+        for (LegoBrick l : brick) {
+            totalFour += l.getBrick4();
+            totalTwo += l.getBrick2();
+            totalOne += l.getBrick1();
+        }
+        list.add(totalFour);
+        list.add(totalTwo);
+        list.add(totalOne);
+        return list;
+    }
 }

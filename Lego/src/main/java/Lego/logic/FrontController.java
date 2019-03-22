@@ -7,6 +7,7 @@ import Lego.data.UserMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -159,12 +160,13 @@ public class FrontController extends HttpServlet {
         int width = (int) Integer.parseInt((String) request.getParameter("width"));
         int height = (int) Integer.parseInt((String) request.getParameter("height"));
 
-        /* Instantiate LegoHouseOrder to add parameters to order */
         LegoHouseOrder order = new LegoHouseOrder(length, width, height);
+        
+        BrickCalculator calc = new BrickCalculator(order);
+        
+        List<LegoBrick> listOfBricks = calc.getListOfBricks(order);
+        List<Integer> totalBricks = calc.getTotalBricks(listOfBricks);
 
-        /* Instantiate BrickCalculator to get acces to its methods*/
-        BrickCalculator calculator = new BrickCalculator();
-        calculator.getBricks(order);
     }
 
     private void view(HttpServletRequest request, HttpServletResponse response) {
