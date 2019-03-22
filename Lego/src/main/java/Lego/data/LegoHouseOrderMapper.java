@@ -40,6 +40,9 @@ public class LegoHouseOrderMapper {
             }
         }
 
+    /**
+     * getOrders returns all orders from one user.
+     */
     public static List<LegoHouseOrder> getOrders(User user) {
         List<LegoHouseOrder> orders = new ArrayList<>();
         

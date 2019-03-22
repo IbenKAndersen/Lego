@@ -6,9 +6,15 @@ package Lego.data;
  */
 public class LegoBrick {
     
-    private int height, brickone, bricktwo, brickfour;
+    private int height, brick1, brick2, brick4;
     
     public LegoBrick() {
+    }
+
+    public LegoBrick(int brick1, int brick2, int brick4) {
+        this.brick1 = brick1;
+        this.brick2 = brick2;
+        this.brick4 = brick4;
     }
 
     public int getHeight() {
@@ -19,28 +25,28 @@ public class LegoBrick {
         this.height = height;
     }
 
-    public int getBrickone() {
-        return brickone;
+    public int getBrick1() {
+        return brick1;
     }
 
-    public void setBrickone(int brickone) {
-        this.brickone = brickone;
+    public void setBrick1(int brick1) {
+        this.brick1 = brick1;
     }
 
-    public int getBricktwo() {
-        return bricktwo;
+    public int getBrick2() {
+        return brick2;
     }
 
-    public void setBricktwo(int bricktwo) {
-        this.bricktwo = bricktwo;
+    public void setBrick2(int brick2) {
+        this.brick2 = brick2;
     }
 
-    public int getBrickfour() {
-        return brickfour;
+    public int getBrick4() {
+        return brick4;
     }
 
-    public void setBrickfour(int brickfour) {
-        this.brickfour = brickfour;
+    public void setBrick4(int brick4) {
+        this.brick4 = brick4;
     }
     
     

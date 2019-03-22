@@ -22,10 +22,15 @@ public class LegoMain {
 //      mapper.createUser(email, password);
 
         /* Not working yet */
-//        LegoHouseOrder order = new LegoHouseOrder();
-//        BrickCalculator calculator = new BrickCalculator();
-//        calculator.getBricks(order);
+//      LegoHouseOrder order = new LegoHouseOrder();
+//      BrickCalculator calculator = new BrickCalculator();
+//      calculator.getBricks(order);
 
+        /* Not woriking yet */
+        LegoHouseOrderMapper mapper = new LegoHouseOrderMapper();
+        User test = new User("Test2@Test2.dk", "Test2");
+        LegoHouseOrder order = new LegoHouseOrder(20, 10, 3);
+        mapper.createOrder(test, order);
     }
 
 }
