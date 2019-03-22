@@ -78,37 +78,120 @@ public class BrickCalculator {
 
         /* Overview of bricks on first (bottom) line, length side */
         LegoBrick length1stLine = new LegoBrick(brick1, brick2, brick4);
-        System.out.println("4x1: " + brick4 + " on 1st line");
-        System.out.println("2x1: " + brick2 + " on 1st line");
-        System.out.println("1x1: " + brick1 + " on 1st line");
+        System.out.println("4x1: " + brick4 + " on 1st line, length");
+        System.out.println("2x1: " + brick2 + " on 1st line, length");
+        System.out.println("1x1: " + brick1 + " on 1st line, length");
         System.out.println("================================================");
         return length1stLine;
     }
 
     public LegoBrick bricksLength2ndLine() {
-        int brick1 = 0, brick2 = 0, brick4 = 0, whatsleft = 0;
-
+        int brick1 = 0, brick2 = 0, brick4 = 0, whatsleft = 0, halfheight = 0;
+        int newLength = 0;
+        
         /* Calculating the number of bricks on the second line, length side */
- /* Overview of bricks on the second line, length side */
+        newLength = length - 4;
+        brick4 = newLength / 4;
+        whatsleft = newLength % 4;
+
+        if (whatsleft >= 2) {
+            brick2 = whatsleft / 2;
+            brick1 = whatsleft % 2;
+        } else {
+            brick2 = 0;
+            brick1 = 1;
+        }
+
+        /* Calculate from height*/
+        /* If the house has more than 2 lines, or has 2 lines */
+        if (height >= 2) {
+            halfheight = height / 2;
+            brick4 = brick4 * halfheight;
+            brick2 = brick2 * halfheight;
+            brick1 = brick1 * halfheight;
+        } 
+        
+        /* Overview of bricks on the second line, length side */
         LegoBrick length2ndLine = new LegoBrick(brick1, brick2, brick4);
+        System.out.println("4x1: " + brick4 + " on 2nd line, length");
+        System.out.println("2x1: " + brick2 + " on 2nd line, length");
+        System.out.println("1x1: " + brick1 + " on 2nd line, length");
+        System.out.println("================================================");
         return length2ndLine;
     }
 
     public LegoBrick bricksWidth1stLine() {
-        int brick1 = 0, brick2 = 0, brick4 = 0, whatsleft = 0;
-
+        int brick1 = 0, brick2 = 0, brick4 = 0, whatsleft = 0, halfheight = 0;
+        int newWidth = 0;
+        
         /* Calculating the number of bricks on the first (bottom) line, width side */
- /* Overview of bricks on first (bottom) line, width side */
+        newWidth = width - 4;
+        brick4 = newWidth / 4;
+        whatsleft = newWidth % 4;
+        
+        if (whatsleft >= 2) {
+            brick2 = whatsleft / 2;
+            brick1 = whatsleft % 2;
+        } else {
+            brick2 = 0;
+            brick1 = 1;
+        }
+
+        /* Calculate from height*/
+        /* If the height is an even number */
+        if (height % 2 == 0) {
+            halfheight = height / 2;
+            brick4 = brick4 * halfheight;
+            brick2 = brick2 * halfheight;
+            brick1 = brick1 * halfheight;
+
+        /* If the height is an uneven number */
+        } else {
+            halfheight = (height / 2) + 1;
+            brick4 = brick4 * halfheight;
+            brick2 = brick2 * halfheight;
+            brick1 = brick1 * halfheight;
+        }
+        
+        /* Overview of bricks on first (bottom) line, width side */
         LegoBrick width1stLine = new LegoBrick(brick1, brick2, brick4);
+        System.out.println("4x1: " + brick4 + " on 1st line, width");
+        System.out.println("2x1: " + brick2 + " on 1st line, width");
+        System.out.println("1x1: " + brick1 + " on 1st line, width");
+        System.out.println("================================================");
         return width1stLine;
     }
 
     public LegoBrick bricksWidth2ndLine() {
-        int brick1 = 0, brick2 = 0, brick4 = 0, whatsleft = 0;
+        int brick1 = 0, brick2 = 0, brick4 = 0, whatsleft = 0, halfheight = 0;
 
         /* Calculating the number of bricks on the second line, width side */
- /* Overview of bricks on second line, width side */
+        brick4 = width / 4;
+        whatsleft = width % 4;
+
+        if (whatsleft >= 2) {
+            brick2 = whatsleft / 2;
+            brick1 = whatsleft % 2;
+        } else {
+            brick2 = 0;
+            brick1 = 1;
+        }
+
+        /* Calculate from height*/
+        /* If the house has more than 2 lines, or has 2 lines */
+        if (height >= 2) {
+            halfheight = height / 2;
+            brick4 = brick4 * halfheight;
+            brick2 = brick2 * halfheight;
+            brick1 = brick1 * halfheight;
+        } 
+        
+         /* Overview of bricks on second line, width side */
         LegoBrick width2ndLine = new LegoBrick(brick1, brick2, brick4);
+        System.out.println("4x1: " + brick4 + " on 2nd line, width");
+        System.out.println("2x1: " + brick2 + " on 2nd line, width");
+        System.out.println("1x1: " + brick1 + " on 2nd line, width");
+        System.out.println("================================================");
         return width2ndLine;
     }
 
