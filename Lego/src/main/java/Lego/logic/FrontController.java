@@ -155,6 +155,7 @@ public class FrontController extends HttpServlet {
             /* Forward user to login page */
             RequestDispatcher dispatch = request.getRequestDispatcher("/login.jsp");
             dispatch.forward(request, response);
+            
         } catch (LoginException e) {
             e.getMessage();
         }
