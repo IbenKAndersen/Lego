@@ -140,18 +140,21 @@ public class FrontController extends HttpServlet {
     }
 
     private void register(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
-        /* Get email and password from parameters in url */
-        String email = (String) request.getParameter("email");
-        String password = (String) request.getParameter("password");
+//        /* Get email and password from parameters in url */
+//        String email = (String) request.getParameter("email");
+//        String password = (String) request.getParameter("password");
+//
+//        /* Make an instance of UserMapper to get acces to its methods */
+//        UserMapper mapper = new UserMapper();
+//
+//        /* Isert the new user information into the sql database */
+//        mapper.createUser(email, password);
 
-        /* Make an instance of UserMapper to get acces to its methods */
-        UserMapper mapper = new UserMapper();
 
-        /* Isert the new user information into the sql database */
-        mapper.createUser(email, password);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
 
-        RequestDispatcher dispatch = request.getRequestDispatcher("shop.jsp");
-        dispatch.forward(request, response);
+//        RequestDispatcher dispatch = request.getRequestDispatcher("login.jsp");
+//        dispatch.forward(request, response);
     }
 
     private void order(HttpServletRequest request, HttpServletResponse response) {
