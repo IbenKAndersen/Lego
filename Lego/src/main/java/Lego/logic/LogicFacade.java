@@ -1,5 +1,6 @@
 package Lego.logic;
 
+import Lego.data.LegoBrick;
 import Lego.data.LegoHouseOrder;
 import Lego.data.LegoHouseOrderMapper;
 import Lego.data.User;
@@ -31,6 +32,14 @@ public class LogicFacade {
     
     public static List<LegoHouseOrder> getOrders(User user) {
         return LegoHouseOrderMapper.getOrders(user);
+    }
+    
+    public static List<LegoBrick> getListOfBricks(LegoHouseOrder order) {
+        return BrickCalculator.getListOfBricks(order);
+    }
+    
+    public static List<Integer> getTotalBricks(List<LegoBrick> brick) {
+        return BrickCalculator.getTotalBricks(brick);
     }
     
 }
