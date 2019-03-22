@@ -7,7 +7,6 @@ package Lego.data;
 public class LegoHouseOrder {
     
     private int length, width, height, id;
-    private boolean sent;
     
     public LegoHouseOrder() {
     }
@@ -49,14 +48,5 @@ public class LegoHouseOrder {
     public void setId(int id) {
         this.id = id;
     }
-
-    public boolean isSent() {
-        return sent;
-    }
-
-    public void setSent(boolean sent) {
-        this.sent = sent;
-    }
-    
     
 }

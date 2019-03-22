@@ -1,8 +1,11 @@
 package Lego.logic;
 
+import Lego.data.LegoHouseOrder;
+import Lego.data.LegoHouseOrderMapper;
 import Lego.data.User;
 import Lego.data.UserMapper;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -20,6 +23,14 @@ public class LogicFacade {
     
     public static User getUser(String email) throws SQLException, ClassNotFoundException {
         return UserMapper.getUser(email);
+    }
+    
+    public static void createOrder(User user, LegoHouseOrder order) throws SQLException, ClassNotFoundException {
+        LegoHouseOrderMapper.createOrder(user, order);
+    }
+    
+    public static List<LegoHouseOrder> getOrders(User user) {
+        return LegoHouseOrderMapper.getOrders(user);
     }
     
 }
