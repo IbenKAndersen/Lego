@@ -19,14 +19,18 @@
 
         <br><br><br>
 
-        <form method="POST" action="/Webshop/FrontController?">
+        <form method="POST" action="/Lego/FrontController">
             <input type="hidden" name="origin" value="order">    
 
             Design your Lego House: <br>
-            <input type="text" name="length" placeholder="Type in length" /> <br>
-            <input type="text" name="width" placeholder="Type in wisth" /> <br>
-            <input type="text" name="hight" placeholder="Type in hight" /> <br><br>
-            <input type="submit" value="Select">
+            <input type="number" name="length" placeholder="Type in length" /> <br>
+            <input type="number" name="width" placeholder="Type in wisth" /> <br>
+            <input type="number" name="height" placeholder="Type in hight" /> <br><br>
+            <input type="submit" value="Select"> <br>
+        
+        </form>  
+        
+        <a href="view.jsp" >View orders </a>
 
             <br><br><br><br>
 
@@ -37,7 +41,7 @@
             <img src="img/lego.jpg" alt="" width="100"/>
 
 
-        </form> 
+
 
     </body>
 </html>

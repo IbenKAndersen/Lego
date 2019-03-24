@@ -7,6 +7,7 @@ import Lego.data.UserMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,9 +53,6 @@ public class FrontController extends HttpServlet {
                 break;
             case "order":
                 order(request, response);
-                break;
-            case "view":
-                view(request, response);
                 break;
             default:
                 throw new AssertionError();
@@ -122,9 +120,9 @@ public class FrontController extends HttpServlet {
             String email = (String) request.getParameter("email");
             String password = (String) request.getParameter("password");
 
-            /* Make an instance of UserMapper to get acces to its methods */
-            UserMapper mapper = new UserMapper();
-            User user = mapper.getUser(email);
+            /* Make an instance of LogicFacade to get access to the methods in UserMapper */
+            LogicFacade method = new LogicFacade();
+            User user = method.getUser(email);
 
             if (password.equals(user.getPassword())) {
                 HttpSession session = request.getSession();
@@ -140,21 +138,22 @@ public class FrontController extends HttpServlet {
 
     }
 
+    /* Register does not work, it won't even forward */
     private void register(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
 //        /* Get email and password from parameters in url */
 //        String email = (String) request.getParameter("email");
 //        String password = (String) request.getParameter("password");
 //
-//        /* Make an instance of UserMapper to get acces to its methods */
-//        UserMapper mapper = new UserMapper();
+//        /* Make an instance of LogicFacade to get access to the methods in UserMapper */
+//        LogicFacade method = new LogicFacade();
 //
 //        /* Isert the new user information into the sql database */
-//        mapper.createUser(email, password);
+//        method.createUser(email, password);
 
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
-    private void order(HttpServletRequest request, HttpServletResponse response) {
+    private void order(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /* Get parameters from the request and parse to int */
         int length = (int) Integer.parseInt((String) request.getParameter("length"));
         int width = (int) Integer.parseInt((String) request.getParameter("width"));
@@ -166,12 +165,22 @@ public class FrontController extends HttpServlet {
         
         List<LegoBrick> listOfBricks = calc.getListOfBricks(order);
         List<Integer> totalBricks = calc.getTotalBricks(listOfBricks);
-
-    }
-
-    private void view(HttpServletRequest request, HttpServletResponse response) {
-        LegoBrick brick = new LegoBrick();
-
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("order", order);
+        session.setAttribute("getListOfBricks", listOfBricks);
+        session.setAttribute("getTotalBricks", totalBricks);
+        
+        List<List> allOrders = (List<List>) session.getAttribute("allOrders");
+        if (allOrders == null) {
+            allOrders = new ArrayList<>();
+        }
+        
+        allOrders.add(listOfBricks);
+        
+        session.setAttribute("allOrders", allOrders);
+        
+        request.getRequestDispatcher("shop.jsp").forward(request, response);
     }
 
 }

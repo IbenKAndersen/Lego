@@ -48,6 +48,11 @@ public class LegoBrick {
     public void setBrick4(int brick4) {
         this.brick4 = brick4;
     }
+
+    @Override
+    public String toString() {
+        return "New line: " + " brick1: " + brick1 + ", brick2: " + brick2 + ", brick4: " + brick4;
+    }
     
     
     

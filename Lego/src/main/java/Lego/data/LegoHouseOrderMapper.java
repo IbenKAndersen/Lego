@@ -46,7 +46,11 @@ public class LegoHouseOrderMapper {
     public static List<LegoHouseOrder> getOrders(User user) {
         List<LegoHouseOrder> orders = new ArrayList<>();
         
-        
+//        for (int i = 0; i < orders.size(); i++) {
+//                if (orders.get(i).getId() == user.getId()) {
+//                    orders.add(i);
+//                }
+//            }
         
         return orders;
     }

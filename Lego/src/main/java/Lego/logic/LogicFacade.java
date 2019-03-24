@@ -34,12 +34,4 @@ public class LogicFacade {
         return LegoHouseOrderMapper.getOrders(user);
     }
     
-    public static List<LegoBrick> getListOfBricks(LegoHouseOrder order) {
-        return BrickCalculator.getListOfBricks(order);
-    }
-    
-    public static List<Integer> getTotalBricks(List<LegoBrick> brick) {
-        return BrickCalculator.getTotalBricks(brick);
-    }
-    
 }

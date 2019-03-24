@@ -29,11 +29,11 @@ public class LegoMain {
 
         /* Not woriking yet */
 //        LegoHouseOrderMapper mapper = new LegoHouseOrderMapper();
-//        User test = new User("Test2@Test2.dk", "Test2");
+//        User test = UserMapper.getUser("Test1@Test1.dk");
 //        LegoHouseOrder order = new LegoHouseOrder(20, 10, 3);
 //        mapper.createOrder(test, order);
         
-        /* */
+        /* This works */
         LegoHouseOrder order = new LegoHouseOrder(20, 10, 3);
         BrickCalculator calc = new BrickCalculator(order);
         
