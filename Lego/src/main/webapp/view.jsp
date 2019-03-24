@@ -12,14 +12,12 @@
         
         <% 
             List<List> lists = (List<List>) session.getAttribute("allOrders"); 
+            List<List> total = (List<List>) session.getAttribute("total");
             
-            for (List list : lists) {
-                out.println(list + "<br><br>");
+            for (int i = 0; i < lists.size(); i++) {
+                out.println(lists.get(i) + "<br><br>");
+                out.println("Total number of bricks for this order [4x2, 2x2, 1x2] = " + total.get(i) + "<br><br>");
             }
-            
-            List<Integer> total = (List<Integer>) session.getAttribute("getTotalBricks");
-            out.println("Total number of bricks for all orders [4x2, 2x2, 1x2] = " + total);
-            
             
         %>
         

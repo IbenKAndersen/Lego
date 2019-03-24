@@ -51,7 +51,7 @@ public class LegoBrick {
 
     @Override
     public String toString() {
-        return "New line: " + " brick1: " + brick1 + ", brick2: " + brick2 + ", brick4: " + brick4;
+        return "<br>New line: " + " brick4: " + brick4 + ", brick2: " + brick2 + ", brick1: " + brick1;
     }
     
     

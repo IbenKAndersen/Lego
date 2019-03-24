@@ -160,26 +160,34 @@ public class FrontController extends HttpServlet {
         int height = (int) Integer.parseInt((String) request.getParameter("height"));
 
         LegoHouseOrder order = new LegoHouseOrder(length, width, height);
-        
         BrickCalculator calc = new BrickCalculator(order);
         
         List<LegoBrick> listOfBricks = calc.getListOfBricks(order);
         List<Integer> totalBricks = calc.getTotalBricks(listOfBricks);
         
+        /* Save the new lists in session */
         HttpSession session = request.getSession();
         session.setAttribute("order", order);
         session.setAttribute("getListOfBricks", listOfBricks);
         session.setAttribute("getTotalBricks", totalBricks);
         
+        /* Method to add more than one order on the view.jsp */
         List<List> allOrders = (List<List>) session.getAttribute("allOrders");
         if (allOrders == null) {
             allOrders = new ArrayList<>();
         }
-        
         allOrders.add(listOfBricks);
-        
         session.setAttribute("allOrders", allOrders);
         
+        /* Method to add more than one total of bricks on the view.jsp */
+        List<List> total = (List<List>) session.getAttribute("total");
+        if (total == null) {
+            total = new ArrayList<>();
+        }
+        total.add(totalBricks);
+        session.setAttribute("total", total);
+        
+        /* Show shop.jsp again to make more orders */
         request.getRequestDispatcher("shop.jsp").forward(request, response);
     }
 

@@ -34,14 +34,14 @@ public class LegoMain {
 //        mapper.createOrder(test, order);
         
         /* This works */
-        LegoHouseOrder order = new LegoHouseOrder(20, 10, 3);
-        BrickCalculator calc = new BrickCalculator(order);
-        
-        List<LegoBrick> listOfBricks = calc.getListOfBricks(order);
-        List<Integer> totalBricks = calc.getTotalBricks(listOfBricks);
-        
-        System.out.println(listOfBricks);
-        System.out.println(totalBricks);
+//        LegoHouseOrder order = new LegoHouseOrder(20, 10, 3);
+//        BrickCalculator calc = new BrickCalculator(order);
+//        
+//        List<LegoBrick> listOfBricks = calc.getListOfBricks(order);
+//        List<Integer> totalBricks = calc.getTotalBricks(listOfBricks);
+//        
+//        System.out.println(listOfBricks);
+//        System.out.println(totalBricks);
     }
 
 }
