@@ -1,5 +1,6 @@
 package Lego.data;
 
+import static Lego.data.Connector.connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,13 +22,11 @@ public class LegoHouseOrderMapper {
      */
     public static void createOrder(User user, LegoHouseOrder order) throws SQLException, ClassNotFoundException {
         try {
-            Connector connect = new Connector();
-
             String addOrder
                     = "INSERT INTO lego.order (`iduser`, `length`, `width`, `height`) "
                     + "VALUES(?,?,?,?);";
 
-            PreparedStatement ps = connect.connection().prepareStatement(addOrder);
+            PreparedStatement ps = connection().prepareStatement(addOrder);
             ps.setInt(1, user.getId());
             ps.setInt(2, order.getLength());
             ps.setInt(3, order.getWidth());

@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>Register here</h1>
-        <form method="POST"  action="/lego/FrontController">
+        <form method="POST"  action="FrontController">
             <input type="hidden" name="origin" value="register">
 
             Email:<br>

@@ -140,15 +140,15 @@ public class FrontController extends HttpServlet {
 
     /* Register does not work, it won't even forward */
     private void register(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, ServletException, IOException {
-//        /* Get email and password from parameters in url */
-//        String email = (String) request.getParameter("email");
-//        String password = (String) request.getParameter("password");
-//
-//        /* Make an instance of LogicFacade to get access to the methods in UserMapper */
-//        LogicFacade method = new LogicFacade();
-//
-//        /* Isert the new user information into the sql database */
-//        method.createUser(email, password);
+        /* Get email and password from parameters in url */
+        String email = (String) request.getParameter("email");
+        String password = (String) request.getParameter("password");
+
+        /* Make an instance of LogicFacade to get access to the methods in UserMapper */
+        LogicFacade method = new LogicFacade();
+
+        /* Isert the new user information into the sql database */
+        method.createUser(email, password);
 
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
